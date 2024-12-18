@@ -1,0 +1,57 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Личный кабинет</h2>
+    <p>Добро пожаловать, {{ request.user.first_name }}!</p>
+    {% if notifications %}
+    <h3>Уведомления</h3>
+    <ul>
+        {% for notification in notifications %}
+        <li>{{ notification.message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h3>История покупок</h3>
+    {% if orders %}
+    <ul>
+        {% for order in orders %}
+        <li>Заказ №{{ order.id }} от {{ order.created|date:"d.m.Y" }} на сумму {{ order.get_total_cost }} руб.</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>У вас еще нет заказов.</p>
+    {% endif %}
+
+    <h3>Ваши отзывы</h3>
+    {% if reviews %}
+    <ul>
+        {% for review in reviews %}
+        <li>
+            <strong>{{ review.product.name }}</strong> - Оценка: {{ review.rating }}<br>
+            {{ review.comment }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Вы еще не оставляли отзывы.</p>
+    {% endif %}
+
+    <h3>Подписки на товары</h3>
+    {% if subscribed_products %}
+    <ul>
+        {% for product in subscribed_products %}
+        <li>{{ product.name }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>У вас нет подписок на товары.</p>
+    {% endif %}
+
+    <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Выйти</button>
+</form>
+</div>
+{% endblock %}

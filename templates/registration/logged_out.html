@@ -1,0 +1,9 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<div class="container text-center">
+    <h2 class="my-4">Вы успешно вышли из аккаунта.</h2>
+    <p>Спасибо за посещение нашего сайта!</p>
+    <a href="{% url 'store:home' %}" class="btn btn-primary">Вернуться на главную страницу</a>
+</div>
+{% endblock %}

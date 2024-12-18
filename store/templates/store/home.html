@@ -1,0 +1,104 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<!-- Hero Banner Carousel -->
+<div id="heroCarousel" class="carousel slide mb-5" data-ride="carousel">
+    <ol class="carousel-indicators">
+        {% for banner in banners %}
+        <li data-target="#heroCarousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
+        {% endfor %}
+    </ol>
+    
+    <div class="carousel-inner">
+        {% for banner in banners %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <img src="{{ banner.image.url }}" class="d-block w-100" alt="{{ banner.title }}">
+            <div class="carousel-caption d-none d-md-block">
+                <h2>{{ banner.title }}</h2>
+                {% if banner.subtitle %}
+                <p>{{ banner.subtitle }}</p>
+                {% endif %}
+                {% if banner.link %}
+                <a href="{{ banner.link }}" class="btn btn-primary btn-lg">{{ banner.button_text }}</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<!-- Categories Section -->
+<section class="categories-section mb-5">
+    <h2 class="text-center mb-4">Категории товаров</h2>
+    <div class="row">
+        {% for category in categories %}
+        <div class="col-md-3 mb-3">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ category.name }}</h5>
+                    <a href="{{ category.get_absolute_url }}" class="btn btn-outline-primary">Перейти</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Special Offers Section -->
+<section class="special-offers-section mb-5">
+    <h2 class="text-center mb-4">Специальные предложения</h2>
+    <div class="row">
+        {% for product in special_offers %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="{{ product.image.url|default:'/static/store/images/default.png' }}" 
+                     class="card-img-top" alt="{{ product.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    <div class="price-block">
+                        {% if product.discount > 0 %}
+                            <span class="old-price text-muted"><del>{{ product.price }} руб.</del></span>
+                            <span class="discount-badge">-{{ product.discount }}%</span>
+                            <span class="new-price text-danger">{{ product.get_discounted_price }} руб.</span>
+                        {% else %}
+                            <span class="price">{{ product.price }} руб.</span>
+                        {% endif %}
+                    </div>
+                    {% if user.is_authenticated %}
+                        {% if product in subscribed_products %}
+                            <form action="{% url 'store:subscribe' product.id %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success btn-sm mt-2">
+                                    <i class="fas fa-check"></i> Подписан
+                                </button>
+                            </form>
+                        {% else %}
+                            <form action="{% url 'store:subscribe' product.id %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-primary btn-sm mt-2">
+                                    <i class="far fa-bell"></i> Подписаться
+                                </button>
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-outline-primary btn-sm mt-2">
+                            Войдите для подписки
+                        </a>
+                    {% endif %}
+                    <a href="{{ product.get_absolute_url }}" class="btn btn-primary btn-block mt-2">Подробнее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

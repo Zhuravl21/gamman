@@ -1,0 +1,242 @@
+/* Общие стили */
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+}
+
+/* Заголовок */
+header {
+    background-color: #007bff;
+}
+
+header h1 a, 
+header .nav-link,
+header button,
+header .btn-link,
+header a,
+header form button,
+header .btn,
+header input,
+header .form-control {
+    color: #007bff !important;
+    background-color: white !important;
+    border-color: #007bff !important;
+}
+
+header .search-form {
+    display: flex;
+    align-items: center;
+}
+
+header .search-form input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+header .search-form button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+header h1 a:hover,
+header .nav-link:hover,
+header button:hover,
+header .btn:hover {
+    color: white !important;
+    background-color: #0056b3 !important;
+    border-color: #0056b3 !important;
+    text-decoration: none;
+}
+
+.nav-icons {
+    display: flex;
+    align-items: center;
+}
+
+.nav-icons a, 
+.nav-icons button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.cart-icon {
+    position: relative;
+    padding-right: 25px;
+}
+
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #dc3545;
+    color: white !important;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.8em;
+}
+
+/* Навигация */
+.nav-link {
+    color: #555;
+    margin-right: 10px;
+}
+
+.nav-link.active, .nav-link:hover {
+    background-color: #007bff;
+    color: #fff !important;
+    border-radius: 5px;
+}
+
+/* Кнопки */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Карточки продуктов */
+.card {
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Отступы */
+.container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Футер */
+footer {
+    background-color: #f8f9fa;
+}
+
+footer p {
+    margin: 0;
+    padding: 10px 0;
+    color: #777;
+}
+
+.btn-block {
+    transition: background-color 0.3s ease;
+}
+
+.btn-block:hover {
+    opacity: 0.9;
+}
+
+.form-inline input[type="search"] {
+    width: 200px;
+}
+
+@media (max-width: 768px) {
+    .form-inline {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .form-inline input[type="search"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+/* Banner Styles */
+.carousel-item {
+    height: 500px;
+    overflow: hidden;
+}
+
+.carousel-item img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Product Card Styles */
+.price-block {
+    margin: 10px 0;
+}
+
+.old-price {
+    text-decoration: line-through;
+    font-size: 0.9em;
+    color: #6c757d;
+    margin-right: 10px;
+}
+
+.discount-badge {
+    background-color: #dc3545;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    margin-right: 10px;
+}
+
+.new-price {
+    font-weight: bold;
+    color: #dc3545;
+    font-size: 1.1em;
+}
+
+/* Category Card Styles */
+.categories-section .card {
+    transition: transform 0.2s;
+}
+
+.categories-section .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+h2, h3 {
+    color: #007bff;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul li {
+    background-color: #fff;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
